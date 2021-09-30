@@ -55,7 +55,11 @@ Response:
     "phone": "******"
 }
 ```
-
+From now on all API requires to be authenticated.
+Add Authorization in header.
+```
+Authorization           Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjMzMDcyMzI4LCJqdGkiOiI1YjM2NGFkMGFlZjA0MzA5OGNlMTIxYTE4NzNiNjZkZiIsInVzZXJfaWQiOiIzNTc3M2QwZC1jZTlhLTQ1YTQtYjI5Yi04Yjk1OTgwY2RmYTAifQ.0ELPM6eHzrFxSIpt3VzJFIb1MuAnXITIX4-jsL-AEz0
+```
 
 Create an User via http://localhost:8001/api/v1/account/users/
 ```
@@ -228,4 +232,21 @@ delete via http://localhost:8001/api/v1/account/users/<user-uuid>
 ```
 Method: DELETE
 Response: No content 204
+```
+
+Change password of a user from 
+http://localhost:8001/api/v1/account/users/<user-uuid>/change-password
+```
+Method: PUT
+Request:
+{
+    "current_password": "123456789",
+    "new_password": "xpD9T2j32jmnVe3",
+    "confirm_new_password": "xpD9T2j32jmnVe3"
+}
+
+Response:
+{
+    "message": "Password changed successfully."
+}
 ```
