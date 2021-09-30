@@ -6,6 +6,10 @@ from account.models import User, Role
 
 admin.site.unregister(AuthGroup)
 
+admin.site.site_header = "Tech3 Admin"
+admin.site.site_title = "Tech3 Admin Portal"
+admin.site.index_title = "Welcome to Tech3 Researcher Portal"
+
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):

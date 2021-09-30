@@ -79,7 +79,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'phone', 'first_name', 'last_name', 'is_active', 'mode', 'address_line1', 'address_line2',
-                  'city',  'postal_code', 'state', 'country',)
+                  'city',  'postal_code', 'state', 'country', 'role')
 
     def update(self, instance, validated_data):
         instance.modified_by = self.context.get('request').user

@@ -1,5 +1,4 @@
-# tech_three
-Django Project
+# A Simple CRUD application in Django with authentication
 Initial steps in short,
 1. Create a django project,
 2. Create an application named account 
@@ -9,25 +8,40 @@ Now from project root directory, where manage.py file is,
 
 do migrations on DB, via 
 
-To check whether there are any changes
+To check whether there are any changes'
+```
 python manage.py makemigrations --dry-run
-
+```
 To prepare for migrations,
+```
 python manage.py makemigrations
-
+```
 To check the unapplied migrations
+```
 python manage.py showmigrations
-
+```
 To apply the change/modifications,
+```
 python manage.py migrate
+```
+Create a super user via 
+```
+python manage.py createsuperuser
+```
+Run server via 
+```
+python manage.py runserver <port-number>  # here i Have used port number 8001
+```
+Login to admin portal by visiting 
+```
+http://localhost:8001/admin
+```
 
-Create a super user via python manage.py createsuperuser
-
-Run server via python manage.py runserver <port-number>  # here i Have used port number 8001
-
-Login to admin portal by visiting http://localhost:8001/admin
-
-Login via API, http://localhost:8001/api/v1/login
+Phone number is replaced with *** due to privacy reason, you will get actual values in it.
+Login via API, 
+```
+http://localhost:8001/api/v1/login
+Method: POST
 Request:
 {
     "phone": "<phone-number>",
@@ -40,10 +54,11 @@ Response:
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjMzMDcyMzI4LCJqdGkiOiI1YjM2NGFkMGFlZjA0MzA5OGNlMTIxYTE4NzNiNjZkZiIsInVzZXJfaWQiOiIzNTc3M2QwZC1jZTlhLTQ1YTQtYjI5Yi04Yjk1OTgwY2RmYTAifQ.0ELPM6eHzrFxSIpt3VzJFIb1MuAnXITIX4-jsL-AEz0",
     "phone": "******"
 }
+```
 
-Phone numbers are replaced with *** due to privacy reason, you will get actual values in it.
 
 Create an User via http://localhost:8001/api/v1/account/users/
+```
 Request Method: POST
 Request Payload:
 {
@@ -78,10 +93,10 @@ Response:
     "role": null
 }
 
-
+```
 
 Get all User by visiting http://localhost:8001/api/v1/account/users
-
+```
 Request Method: GET
 Response:
 {
@@ -151,8 +166,9 @@ Response:
         }
     ]
 }
-
+```
 Get individual user via http://localhost:8001/api/v1/account/users/<user-uuid>
+```
 Method: GET
 Response:
 {
@@ -170,8 +186,9 @@ Response:
     "country": null,
     "role": null
 }
-
+```
 Update an user via http://localhost:8001/api/v1/account/users/<user-uuid>
+```
 Method: PUT
 Request:
 {
@@ -205,8 +222,10 @@ Response:
     "country": null,
     "role": null
 }
-
+```
 Delete an user object, here we have implemented soft delete.
 delete via http://localhost:8001/api/v1/account/users/<user-uuid>
+```
 Method: DELETE
 Response: No content 204
+```
