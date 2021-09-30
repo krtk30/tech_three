@@ -235,7 +235,9 @@ Response: No content 204
 ```
 
 Change password of a user from 
+```
 http://localhost:8001/api/v1/account/users/<user-uuid>/change-password
+```
 ```
 Method: PUT
 Request:
