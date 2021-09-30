@@ -4,11 +4,12 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from account.models import User, Role, Mode
-from tech_three.utils.validators import PHONE_REGEX
+from account.models import User, Role, Mode, Country, State
+from tech_three.utils.validators import PHONE_REGEX, NAME_REGEX
 
 
 class LoginSerializer(serializers.Serializer):
+    """Serializer for Login endpoint"""
     phone = serializers.CharField(label=_('Phone'), allow_blank=False, validators=[PHONE_REGEX])
     password = serializers.CharField(
         label=_('Password'),
@@ -44,15 +45,41 @@ class LoginSerializer(serializers.Serializer):
 
 
 class RoleSerializer(serializers.ModelSerializer):
+    """Serializer for Role details"""
     class Meta:
         model = Role
         fields = ('id', 'name', 'description', 'mode')
 
 
+class CountrySerializer(serializers.ModelSerializer):
+    """Serializer for Country details"""
+    class Meta:
+        model = Country
+        fields = ('id', 'name', )
+
+
+class StateSerializer(serializers.ModelSerializer):
+    """Serializer for State details"""
+
+    class Meta:
+        model = State
+        fields = ('id', 'name', )
+
+    def to_representation(self, instance):
+        data = super(StateSerializer, self).to_representation(instance=instance)
+        data['name'] = data['name'].title()
+        return data
+
+
 class UserSerializer(serializers.ModelSerializer):
+    """Serializer for User details"""
+    first_name = serializers.CharField(label=_('First Name'), allow_blank=False, validators=[NAME_REGEX])
+    last_name = serializers.CharField(label=_('Last Name'), allow_blank=False, validators=[NAME_REGEX])
+
     class Meta:
         model = User
-        fields = ('id', 'phone', 'first_name', 'last_name', 'is_active', 'mode')
+        fields = ('id', 'phone', 'first_name', 'last_name', 'is_active', 'mode', 'address_line1', 'address_line2',
+                  'city',  'postal_code', 'state', 'country',)
 
     def update(self, instance, validated_data):
         instance.modified_by = self.context.get('request').user

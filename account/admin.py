@@ -1,7 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group as AuthGroup
 
 # Register your models here.
 from account.models import User, Role
+
+admin.site.unregister(AuthGroup)
 
 
 @admin.register(Role)
